@@ -1,0 +1,8 @@
+{
+	"0": "Normal",
+	"1": "RBB (Right bundle branch)",
+	"2": "PAB (Paced beat)",
+	"3": "PVC (Premature ventricular contraction)",
+	"4": "LBB (Left bundle branch)",
+	"5": "APB (Atrial premature beat)"
+}
