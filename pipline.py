@@ -121,11 +121,9 @@ class BasePipeline:
         fig.write_json(
             os.path.join("./html/", os.path.basename(self.path + ".json")),
         )
-        
-        io.write_json(fig, f"./html/{self.path}.json")
-		  #fig.write_image(os.path.join(
-        #         "./images/", os.path.basename(self.path + ".png")
-		  #))
+        fig.write_image(os.path.join(
+                 "./images/", os.path.basename(self.path + ".jpeg")
+		))
         class_mapper = json.load(open("full_class_mapper.json"))
         pd_class = [class_mapper.get(str(value)) for value in pd_class]
         return pd_peaks, pd_class
