@@ -116,6 +116,7 @@ def predict():
         
         figure_content = json.load(open(f"./{app.config['JSON_FOLDER']}/{filename1[:-4]}.json"))
         #text_content = request_chatgpt(f"./{app.config['IMAGES_FOLDER']}/{filename1[:-4]}.jpeg")
+        text_content = "adfasdf"
         os.remove(file1_path)
         os.remove(file2_path)
         os.remove(file3_path)

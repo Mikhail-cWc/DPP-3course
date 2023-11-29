@@ -86,6 +86,7 @@ class BasePipeline:
         inputs = inputs.cpu().numpy()[:self.beats]
         inputs = inputs.squeeze(1).reshape(128*self.beats)
         annotations = []
+        
         for i, (label, peak) in enumerate(zip(pd_class, pd_peaks)):
             if label != 0:
                 annotations.append(
@@ -101,6 +102,7 @@ class BasePipeline:
                         "arrowsize": 2,
                     },
                 )
+                
 
         fig = go.Figure(
             data=go.Scatter(
