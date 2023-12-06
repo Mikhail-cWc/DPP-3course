@@ -86,13 +86,11 @@ class BasePipeline:
         inputs = inputs.cpu().numpy()[:self.beats]
         inputs = inputs.squeeze(1).reshape(128*self.beats)
         annotations = []
-        
         for i, (label, peak) in enumerate(zip(pd_class, pd_peaks)):
-            if label != 0:
                 annotations.append(
                     {
                         "x": peak,
-                        "y": inputs[peak]-0.1,
+                        "y": inputs[peak]+0.1,
                         "text": self.mapper.get(str(label)),
                         "xref": "x",
                         "yref": "y",
@@ -100,23 +98,39 @@ class BasePipeline:
                         "arrowcolor": "black",
                         "arrowhead": 1,
                         "arrowsize": 2,
+                        "width": 75,
+                        "bgcolor": "#ffecf7",
+                        "bordercolor": "black",
+                        "borderwidth": 0.2
                     },
                 )
-                
-
+        
         fig = go.Figure(
             data=go.Scatter(
                 x=list(range(len(inputs))),
                 y=inputs,
+                mode = 'lines',
+                line = dict(color='#361125', width=1.65)
             ),
         )
+
+    
         fig.update_layout(
-            title="ECG",
-            xaxis_title="Time",
-            yaxis_title="ECG Output Value",
+            plot_bgcolor='#ffecf7',
+            xaxis = dict(showgrid=True,
+                         gridcolor='#f374b8',
+                         gridwidth=1, nticks = 30, zeroline = False),
+            yaxis=dict(showgrid=True,
+                       gridcolor='#f374b8', 
+                       gridwidth=1, nticks = 20, zeroline = False)
+        )
+        fig.update_layout(
+            title=dict(text="ECG", font=dict(size=18, color='darkblue')),
+            xaxis_title=dict(text="Time", font=dict(size=16, color='darkblue')),
+            yaxis_title=dict(text="ECG Output Value", font=dict(size=16, color='darkblue')),
             title_x=0.5,
             annotations=annotations,
-            height=400,  # Set the desired height of the graph
+            height=400,  
             width=800, 
         )
 
